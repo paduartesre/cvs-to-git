@@ -24,7 +24,7 @@ Install python in your distro.
 <b>sudo apt-get update <br>
 sudo apt-get install python3.6</b>
 
-Before start process conversion, open the file python below and insert parameters about threads processing also document has been executed in repository CVS with more than 12 years data and much more than five hundred thousand commits for processing.
+Before start process conversion, open the file python below and insert parameters about threads processing also procedure have performed in repository CVS with more than 12 years data and much more than five hundred thousand commits for processing.
 
 **`vim /usr/lib/python2.7/dist-packages/cvs2svn_lib/changeset.py`**
 
