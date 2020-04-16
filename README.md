@@ -1,4 +1,4 @@
-# cvst-to-git
+# CVS-to-GIT
 
 ----------- Pre-requisites before to initial process conversion -------------
 
@@ -9,6 +9,7 @@
    - Recommended 24 GB Memory RAM
    - 1 Disk SSD M2.NVME or UltraSSD provide for Microsoft Azure (Used this scenario UltraSSD Disk provide by VM Azure)
    - 1 Disk only for backup other files
+   - Install python, git, cvs and cvs2svn
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -30,4 +31,22 @@ Before start process conversion, open the file python below and insert parameter
 
 import sys<br>
 sys.setrecursionlimit(50000)  #value is 50000 or above
+
+------------------------------------------------------------------------------------------------------------
+
+2º step - Perfom conversion full repository full CVS to SVN in a dump file.
+
+In your distro Linux, execute this command:
+
+**`cvs2svn  --encoding=ascii --encoding=utf8 --encoding=utf16 --encoding=latin --dumpfile=/mnt/n/cvs2/project-repo.dump --trunk=project-repo/trunk --branches=project-repo/tags  /mnt/n/cvs2/Backup-CVSStorage/Data/CVS/Repository/project-repo`**
+
+In my case, this process duration of 12 hours.
+
+------------------------------------------------------------------------------------------------------------
+
+3º step (VM Windows) - Import dump file in VisualSVN to review and validate data of repository in the dump. To import file dump VM Linux to Windows, use SAMBA, or a tool of transfer files, FTP, SFTP or any service of cloud transfer files between VMs. In this case I perform the transfer, configuring a machine Linux in a server file of service MEGA with RSA4096 bits. The procedure to accomplish this, its found here in my repo portfolio.
+
+Install the VisualSVN, open the program and select in the top menu -> **`New -> Import Repository.`**
+
+After this, select the file dump and wait for the import process to finish.
 
