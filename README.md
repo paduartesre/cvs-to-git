@@ -72,20 +72,21 @@ This get list, the display of items that confirmed, filter lines that initial wi
 
 ------------------------------------------------------------------------------------------------------------
 
-5º passo - Executar a migração para o GIT sem o arquivo authors.txt
+5º step - Perform migration to GIT without file authors.txt (Not recommend! Execute only for purposes test)
 
-git svn clone https://ti-0199.clsoftware.com.br/svn/projects2/ "C:\git\projects2" -s --no-metadata
+In Windows, execute:
 
-O comando poderá solicitar a credencial de acesso ao SVN que foi configurado no momento da instalação do VisualSVN.
+git svn clone https://url-your-repo/svn/projects2/ "C:\git\projects-repo" -s --no-metadata
 
-Executar a migração para o GIT com o arquivo authors.txt
+<br>Notice: The command have request credencials acess at SVN that has configured in installation VisualSVN.</br>
+
+<br>Perform migration to GIT with file authors.txt</br>
 
 git svn clone https://ti-0199.clsoftware.com.br/svn/projects2/ "C:\git\projects2" -s --no-metadata --authors-file="authors.txt"
 
---------
-Linux
+Or working on Linux, see command below:
 
-git svn clone -r1:HEAD --no-minimize-url --stdlayout --no-metadata --authors-file /home/pedro/authors/authors.txt https://ti-0199.clsoftware.com.br/svn/projects2/
+git svn clone -r1:HEAD --no-minimize-url --stdlayout --no-metadata --authors-file /home/folder/folder-b/authors.txt https://url-your-repo/svn/project-repo/
 
 ------------------------------------------------------------------------------------------------------------
 
