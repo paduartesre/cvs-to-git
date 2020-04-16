@@ -50,3 +50,22 @@ Install the VisualSVN, open the program and select in the top menu -> **`New -> 
 
 After this, select the file dump and wait for the import process to finish.
 
+------------------------------------------------------------------------------------------------------------
+
+4° step - Execute GIT-SVN to convert SVN to GIT
+
+In the servidor where is installed and configured SVN, GIT, perform command below to generate file authors.txt. This command have perform inside repository SVN in the Linux.
+
+<b>1º option of command:</b> **`svn log | grep '^r[0-9]' | awk '{print $3}' | sort | uniq `**
+
+or 
+
+<b>2º option of command:</b> **`svn log -q /opt/svn/svn-win/trunk | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > /home/path/your_folder/authors.txt`**
+
+or
+
+<b>3º option of command:</b> **`svn log -q https://url-your-svnrepo/svn/project-repo/trunk | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > /home/path/your_folder/authors.txt`**
+
+--
+This get list, the display of items that confirmed, filter lines that initial with a revision, number, author, date, list and delete duplicates lines.
+ ( r[12345] | author | date-and-stuff...), print (autor), list and delete duplicates lines. )
