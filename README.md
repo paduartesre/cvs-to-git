@@ -69,3 +69,31 @@ or
 --
 This get list, the display of items that confirmed, filter lines that initial with a revision, number, author, date, list and delete duplicates lines.
  ( r[12345] | author | date-and-stuff...), print (autor), list and delete duplicates lines. )
+
+------------------------------------------------------------------------------------------------------------
+
+5º passo - Executar a migração para o GIT sem o arquivo authors.txt
+
+git svn clone https://ti-0199.clsoftware.com.br/svn/projects2/ "C:\git\projects2" -s --no-metadata
+
+O comando poderá solicitar a credencial de acesso ao SVN que foi configurado no momento da instalação do VisualSVN.
+
+Executar a migração para o GIT com o arquivo authors.txt
+
+git svn clone https://ti-0199.clsoftware.com.br/svn/projects2/ "C:\git\projects2" -s --no-metadata --authors-file="authors.txt"
+
+--------
+Linux
+
+git svn clone -r1:HEAD --no-minimize-url --stdlayout --no-metadata --authors-file /home/pedro/authors/authors.txt https://ti-0199.clsoftware.com.br/svn/projects2/
+
+------------------------------------------------------------------------------------------------------------
+
+6º passo - Migrar tags SVN para formato tags GIT
+
+
+git for-each-ref refs/remotes/tags | cut -d / -f 4- | grep -v @ | while read tagname; do git tag "$tagname" "tags/$tagname"; git branch -r -d "tags/$tagname"; done
+
+------------------------------------------------------------------------------------------------------------
+
+
