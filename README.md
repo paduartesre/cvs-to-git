@@ -30,7 +30,7 @@ Before start process conversion, open the file python below and insert parameter
 **`vim /usr/lib/python2.7/dist-packages/cvs2svn_lib/changeset.py`**
 
 import sys<br>
-sys.setrecursionlimit(50000)  #value is 50000 or above
+sys.setrecursionlimit(2000000) 
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -38,17 +38,32 @@ sys.setrecursionlimit(50000)  #value is 50000 or above
 
 In your distro Linux, execute this command:
 
-**`cvs2svn  --encoding=ascii --encoding=utf8 --encoding=utf16 --encoding=latin --dumpfile=/mnt/n/cvs2/project-repo.dump --trunk=project-repo/trunk --branches=project-repo/tags  /mnt/n/cvs2/Backup-CVSStorage/Data/CVS/Repository/project-repo`**
+**`cvs2svn  --encoding=ascii --encoding=utf8 --encoding=utf16 --encoding=latin --dumpfile=/mnt/n/cvs2/project-repo.dump --trunk=project-repo/trunk --branches=project-repo/tags  /mnt/n/cvs2/Backup-CVS/Data/CVS/Repository/project-repo`**
 
 In my case, this process duration of 12 hours.
 
 ------------------------------------------------------------------------------------------------------------
 
-3º step (VM Windows) - Import dump file in VisualSVN to review and validate data of repository in the dump. To import file dump VM Linux to Windows, use SAMBA, or a tool of transfer files, FTP, SFTP or any service of cloud transfer files between VMs. In this case I perform the transfer, configuring a machine Linux in a server file of service MEGA with RSA4096 bits. The procedure to accomplish this, its found here in my repo portfolio.
+3º step Import File Dump  CVS - Windows or Linux
+
+(VM Windows)
+- Import dump file in VisualSVN to review and validate data of repository in the dump. To import file dump VM Linux to Windows, use SAMBA, or a tool of transfer files, FTP, SFTP or any service of cloud transfer files between VMs. In this case I perform the transfer, configuring a machine Linux in a server file of service MEGA with RSA4096 bits. The procedure to accomplish this, its found here in my repo portfolio.
 
 Install the VisualSVN, open the program and select in the top menu -> **`New -> Import Repository.`**
 
 After this, select the file dump and wait for the import process to finish.
+
+(VM Linux)
+- Before to execute this, need install SVN Server. See my repo https://github.com/duarpadev/install-svn. After installation, execute this steps below.
+
+svnadmin create /var/www/svn/
+mkidr -p /var/www/svn/projects/fosslinuxrepo
+chown -R /var/www/svn/projects/fosslinuxrepo
+svn mkdir file:///var/www/svn/fosslinuxrepo/projects -m "Adicionando projects repositorio"
+svn mkdir file:///var/www/svn/fosslinuxrepo/projects/head -m "Adicionando head no repositorio projects"
+svn mkdir file:///var/www/svn/fosslinuxrepo/projects/branches -m "Adicionando branches ao projects repositorio"
+svn mkdir file:///var/www/svn/fosslinuxrepo/projects/tags -m "Adicionando branches ao projects repositorio"
+svnadmin load /var/www/svn/fosslinuxrepo/projects < projects.dump
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -56,17 +71,24 @@ After this, select the file dump and wait for the import process to finish.
 
 In the servidor where is installed and configured SVN, GIT, perform command below to generate file authors.txt. This command have perform inside repository SVN in the Linux.
 
-<b>1º option of command:</b> **`svn log | grep '^r[0-9]' | awk '{print $3}' | sort | uniq `**
+1º option of command:
+
+```svn log | grep '^r[0-9]' | awk '{print $3}' | sort | uniq ```
 
 or 
 
-<b>2º option of command:</b> **`svn log -q /opt/svn/svn-win/trunk | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > /home/path/your_folder/authors.txt`**
+2º option of command:
+
+```svn log -q /opt/svn/svn-win/trunk | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > /home/path/your_folder/authors.txt```
 
 or
 
-<b>3º option of command:</b> **`svn log -q https://url-your-svnrepo/svn/project-repo/trunk | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > /home/path/your_folder/authors.txt`**
+3º option of command:
+
+```svn log -q https://url-your-svnrepo/svn/project-repo/trunk | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > /home/path/your_folder/authors.txt```
 
 --
+
 This get list, the display of items that confirmed, filter lines that initial with a revision, number, author, date, list and delete duplicates lines.
  ( r[12345] | author | date-and-stuff...), print (autor), list and delete duplicates lines. )
 
@@ -76,24 +98,23 @@ This get list, the display of items that confirmed, filter lines that initial wi
 
 In Windows, execute:
 
-**`git svn clone https://url-your-repo/svn/projects2/ "C:\git\projects-repo" -s --no-metadata`**
+```git svn clone https://url-your-repo/svn/projects2/ "C:\git\projects-repo" -s --no-metadata```
 
 <br>Notice: The command have request credencials acess at SVN that has configured in installation VisualSVN.</br>
 
 -> Perform migration to GIT with file authors.txt</br>
 
-**`git svn clone https://ti-0199.clsoftware.com.br/svn/projects2/ "C:\git\projects2" -s --no-metadata --authors-file="authors.txt"`**
+```git svn clone https://ti-0199.clsoftware.com.br/svn/projects2/ "C:\git\projects2" -s --no-metadata --authors-file="authors.txt"```
 
-Or working on Linux, see command below:
+Or working on Linux, see command below. 
 
-**`git svn clone -r1:HEAD --no-minimize-url --stdlayout --no-metadata --authors-file /home/folder/folder-b/authors.txt https://url-your-repo/svn/project-repo/`**
+```git svn clone -r1:HEAD --no-minimize-url --stdlayout --no-metadata --authors-file /home/folder/folder-b/authors.txt https://url-your-repo/svn/project-repo/```
 
 ------------------------------------------------------------------------------------------------------------
 
-6º passo - Migrar tags SVN para formato tags GIT
+6º step - Converting tags SVN to tags GIT
 
-
-git for-each-ref refs/remotes/tags | cut -d / -f 4- | grep -v @ | while read tagname; do git tag "$tagname" "tags/$tagname"; git branch -r -d "tags/$tagname"; done
+```git for-each-ref refs/remotes/tags | cut -d / -f 4- | grep -v @ | while read tagname; do git tag "$tagname" "tags/$tagname"; git branch -r -d "tags/$tagname"; done```
 
 ------------------------------------------------------------------------------------------------------------
 
