@@ -22,12 +22,14 @@ Process conversion of repository CVS to GIT
 
 Install python in your distro.
 
-<b>sudo apt-get update <br>
-sudo apt-get install python3.6</b>
+```
+sudo apt-get update
+sudo apt-get install python3.6
+```
 
 Before start process conversion, open the file python below and insert parameters about threads processing also procedure have performed in repository CVS with more than 12 years data and much more than five hundred thousand commits for processing.
 
-**`vim /usr/lib/python2.7/dist-packages/cvs2svn_lib/changeset.py`**
+```vim /usr/lib/python2.7/dist-packages/cvs2svn_lib/changeset.py```
 
 import sys<br>
 sys.setrecursionlimit(2000000) 
@@ -38,7 +40,7 @@ sys.setrecursionlimit(2000000)
 
 In your distro Linux, execute this command:
 
-**`cvs2svn  --encoding=ascii --encoding=utf8 --encoding=utf16 --encoding=latin --dumpfile=/mnt/n/cvs2/project-repo.dump --trunk=project-repo/trunk --branches=project-repo/tags  /mnt/n/cvs2/Backup-CVS/Data/CVS/Repository/project-repo`**
+```cvs2svn  --encoding=ascii --encoding=utf8 --encoding=utf16 --encoding=latin --dumpfile=/mnt/n/cvs2/project-repo.dump --trunk=project-repo/trunk --branches=project-repo/tags  /mnt/n/cvs2/Backup-CVS/Data/CVS/Repository/project-repo```
 
 In my case, this process duration of 12 hours.
 
@@ -49,9 +51,11 @@ In my case, this process duration of 12 hours.
 (VM Windows)
 - Import dump file in VisualSVN to review and validate data of repository in the dump. To import file dump VM Linux to Windows, use SAMBA, or a tool of transfer files, FTP, SFTP or any service of cloud transfer files between VMs. In this case I perform the transfer, configuring a machine Linux in a server file of service MEGA with RSA4096 bits. The procedure to accomplish this, its found here in my repo portfolio.
 
-Install the VisualSVN, open the program and select in the top menu -> **`New -> Import Repository.`**
+Install the VisualSVN, open the program and select in the top menu -> ```New -> Import Repository.```
 
 After this, select the file dump and wait for the import process to finish.
+
+|
 
 (VM Linux)
 - Before to execute this, need install SVN Server. See my repo https://github.com/duarpadev/install-svn. After installation, execute this steps below.
