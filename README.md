@@ -83,11 +83,13 @@ In the servidor where is installed and configured SVN, GIT, perform command belo
 
 or 
 
+
 2º option of command:
 
 ```svn log -q /opt/svn/svn-win/trunk | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > /home/path/your_folder/authors.txt```
 
 or
+
 
 3º option of command:
 
@@ -123,9 +125,9 @@ Or working on Linux, see command below. (I recommend this command)
 
 Access directory of repository converted and execute the following commands.
 
+Convert weird tag branches to real git tags:
 ```
 cd projects
-Convert weird tag branches to real git tags:
 cp -Rf .git/refs/remotes/tags/* .git/refs/tag s/
 rm -Rf .git/refs/remotes/tags
 ```
@@ -134,8 +136,8 @@ rm -Rf .git/refs/remotes/tags
 
 7º step - Converting branches SVN to branches GIT
 
+Convert old svn branches to real git branches:
 ```
-Convert old svn branches to real git branches :
 #cp -Rf .git/refs/remotes/* .git/refs/heads/
 cp -Rf refs/remotes/* /ssd/projects/.git/refs/heads/
 rm -Rf .git/refs/remotes
@@ -148,13 +150,13 @@ rm -Rf .git/refs/remotes
 
 Method 1
 
-Add URL new GitHub repo in you repo
+Add URL new GitHub repo in your repo!
 
 ```
 git remote add origin https://url/repositorio.git
 ```
 
-Send all reposirtoy with tags and branches
+Send all reposirtoy with tags and branches...
 
 ```
 git push origin –-all
@@ -165,7 +167,7 @@ Notice: If prompt credentials, enter with credentials of your service Git (eg. G
 
 |
 
-Method 2 -----
+Method 2 --> Recommend
 
 ```
 cd /git/project.git
