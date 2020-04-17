@@ -56,14 +56,16 @@ After this, select the file dump and wait for the import process to finish.
 (VM Linux)
 - Before to execute this, need install SVN Server. See my repo https://github.com/duarpadev/install-svn. After installation, execute this steps below.
 
+```
 svnadmin create /var/www/svn/
-mkidr -p /var/www/svn/projects/fosslinuxrepo
-chown -R /var/www/svn/projects/fosslinuxrepo
-svn mkdir file:///var/www/svn/fosslinuxrepo/projects -m "Adicionando projects repositorio"
-svn mkdir file:///var/www/svn/fosslinuxrepo/projects/head -m "Adicionando head no repositorio projects"
-svn mkdir file:///var/www/svn/fosslinuxrepo/projects/branches -m "Adicionando branches ao projects repositorio"
-svn mkdir file:///var/www/svn/fosslinuxrepo/projects/tags -m "Adicionando branches ao projects repositorio"
-svnadmin load /var/www/svn/fosslinuxrepo/projects < projects.dump
+mkidr -p /var/www/svn/projects/folder
+chown -R /var/www/svn/projects/folder
+svn mkdir file:///var/www/svn/folder/projects -m "Add projects repository"
+svn mkdir file:///var/www/svn/folder/projects/head -m "Add head at repository projects"
+svn mkdir file:///var/www/svn/folder/projects/branches -m "Add branches at projects repository"
+svn mkdir file:///var/www/svn/folder/projects/tags -m "Add branches at projects repository"
+svnadmin load /var/www/svn/folder/projects < projects.dump
+```
 
 ------------------------------------------------------------------------------------------------------------
 
