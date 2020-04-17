@@ -104,13 +104,13 @@ This get list, the display of items that confirmed, filter lines that initial wi
 
 In Windows, execute:
 
-```git svn clone https://url-your-repo/svn/projects2/ "C:\git\projects-repo" -s --no-metadata```
+```git svn clone https://url-your-repo/svn/project-repo/ "C:\git\projects-repo" -s --no-metadata```
 
 <br>Notice: The command have request credencials acess at SVN that has configured in installation VisualSVN.</br>
 
 -> Perform migration to GIT with file authors.txt</br>
 
-```git svn clone https://ti-0199.clsoftware.com.br/svn/projects2/ "C:\git\projects2" -s --no-metadata --authors-file="authors.txt"```
+```git svn clone https://url-your-repo/svn/project-repo/ "C:\git\projects2" -s --no-metadata --authors-file="authors.txt"```
 
 Or working on Linux, see command below. 
 
