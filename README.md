@@ -31,8 +31,11 @@ Before start process conversion, open the file python below and insert parameter
 
 ```vim /usr/lib/python2.7/dist-packages/cvs2svn_lib/changeset.py```
 
+```
 import sys<br>
 sys.setrecursionlimit(2000000) 
+```
+Save and exit file.
 
 ------------------------------------------------------------------------------------------------------------
 
