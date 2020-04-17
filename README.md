@@ -106,13 +106,14 @@ In Windows, execute:
 
 ```git svn clone https://url-your-repo/svn/project-repo/ "C:\git\projects-repo" -s --no-metadata```
 
+
 <br>Notice: The command have request credencials acess at SVN that has configured in installation VisualSVN.</br>
 
 -> Perform migration to GIT with file authors.txt</br>
 
 ```git svn clone https://url-your-repo/svn/project-repo/ "C:\git\projects2" -s --no-metadata --authors-file="authors.txt"```
 
-Or working on Linux, see command below. 
+Or working on Linux, see command below. (I recommend this command)
 
 ```git svn clone -r1:HEAD --no-minimize-url --stdlayout --no-metadata --authors-file /home/folder/folder-b/authors.txt https://url-your-repo/svn/project-repo/```
 
@@ -120,8 +121,59 @@ Or working on Linux, see command below.
 
 6º step - Converting tags SVN to tags GIT
 
-```git for-each-ref refs/remotes/tags | cut -d / -f 4- | grep -v @ | while read tagname; do git tag "$tagname" "tags/$tagname"; git branch -r -d "tags/$tagname"; done```
+Access directory of repository converted and execute the following commands.
+
+```
+cd projects
+Convert weird tag branches to real git tags:
+cp -Rf .git/refs/remotes/tags/* .git/refs/tag s/
+rm -Rf .git/refs/remotes/tags
+```
 
 ------------------------------------------------------------------------------------------------------------
 
+7º step - Converting branches SVN to branches GIT
+
+```
+Convert old svn branches to real git branches :
+#cp -Rf .git/refs/remotes/* .git/refs/heads/
+cp -Rf refs/remotes/* /ssd/projects/.git/refs/heads/
+rm -Rf .git/refs/remotes
+```
+
+------------------------------------------------------------------------------------------------------------
+
+8º step - Create new repository GIT to hosting in GitHub
+
+
+Method 1
+
+Add URL new GitHub repo in you repo
+
+```
+git remote add origin https://url/repositorio.git
+```
+
+Send all reposirtoy with tags and branches
+
+```
+git push origin –-all
+git push -u origin master
+```
+
+Notice: If prompt credentials, enter with credentials of your service Git (eg. GitHub, GitLab, Gitea, Git Azure Repo, etc.)
+
+|
+
+Method 2 -----
+
+```
+cd /git/project.git
+git remote add origin http://gitlab.yourcompany.com/namespace/git_repo_name.git
+git config --global user.email "user@yourcompany.com"
+git config --global user.name "User Name"
+git add --all
+git commit -m "Convert CVS to Git"
+git push origin master
+```
 
