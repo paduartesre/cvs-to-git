@@ -9,7 +9,7 @@
    - Recommended 24 GB Memory RAM
    - 1 Disk SSD M2.NVME or UltraSSD provide for Microsoft Azure (Used this scenario UltraSSD Disk provide by VM Azure)
    - 1 Disk only for backup other files
-   - Install python, git, cvs and cvs2svn
+   - Install python, git, svn, cvs and cvs2svn
 
 ------------------------------------------------------------------------------------------------------------
 
