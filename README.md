@@ -182,3 +182,7 @@ git commit -m "Convert CVS to Git"
 git push origin master
 ```
 
+## Solution
+
+![](cvs-to-git.png)
+
